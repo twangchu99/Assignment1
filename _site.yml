@@ -1,0 +1,14 @@
+name: "website"
+title: "Tshering Wangchuk"
+description: |
+  Tshering Wangchuk's R Portfolio 
+output_dir: "_site"
+navbar:
+  right:
+    - text: "About"
+      href: index.html
+    - text: "Blog"
+      href: blog.html
+    - icon: fa fa-linkedin
+      href: https://www.linkedin.com/in/tshering-wangchuk1/
+output: distill::distill_article
