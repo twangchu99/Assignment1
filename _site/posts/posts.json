@@ -11,9 +11,9 @@
     ],
     "date": "2021-09-09",
     "categories": [],
-    "contents": "\n\n\n\n",
+    "contents": "\nDescription\n This objective of this blog post is to learn how to set up a website using R (distill). The post is the first of many, as I begin documenting my R work and portfolio under the guidance of Professor Lisa Lendway in the coming months.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-09-09T20:18:09-05:00",
-    "input_file": {}
+    "last_modified": "2021-09-09T21:00:22-05:00",
+    "input_file": "assignment1distill.knit.md"
   }
 ]

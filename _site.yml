@@ -12,3 +12,4 @@ navbar:
     - icon: fa fa-linkedin
       href: https://www.linkedin.com/in/tshering-wangchuk1/
 output: distill::distill_article
+theme: "Tshering_theme.css"
