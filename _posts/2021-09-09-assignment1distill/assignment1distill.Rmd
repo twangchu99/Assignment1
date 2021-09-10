@@ -15,5 +15,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+<br> This objective of this blog post is to learn how to set up a website using R (distill). The post is the first of many, as I begin documenting my R work and portfolio under the guidance of Professor [Lisa Lendway](https://github.com/llendway) in the coming months. 
+
 
 
