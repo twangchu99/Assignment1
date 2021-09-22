@@ -1,7 +1,7 @@
 [
   {
-    "path": "posts/2021-09-09-assignment1distill/",
-    "title": "Tidy Tuesday 2: Audio Features Dataset",
+    "path": "posts/2021-09-22-tidy-tuesday-2/",
+    "title": "Tidy Tuesday 2",
     "description": "This post will explore how features / characteristics of music production affect their popularity on Spotify",
     "author": [
       {
@@ -12,8 +12,25 @@
     "date": "2021-09-22",
     "categories": [],
     "contents": "\nLoading Library\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(ggthemes)\n\n\n\nLoading dataset\n\n\naudio_features <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-14/audio_features.csv')\n\n\n\nData Visualization\n\n\n Audio <- audio_features %>% \n          filter(performer %in% c(\"Drake\", \"Beyonce\", \"Polo G\", \"Ariana Grande\")) %>%\n          group_by(performer) %>%\n          select(spotify_track_popularity, danceability)\n\nAudio %>% ggplot(aes(x = danceability, y = spotify_track_popularity)) + geom_smooth(method = lm) + \n          labs(title = \"The Relationship Between Popularity and Danceability on Spotify\",\n                    x = \"Danceability\",\n                    y = \"Popularity\",\n                    caption = \" Source: Tshering Wangchuk, Macalester College\") + \n          theme_clean()\n\n\n\n\n The goal of using this dataset was to obersve characteristics / features of music that increased it’s popularity on Spotify. I selected four artists that have a large following among the younger generation and the plot displays that the chances of a song being liked on spotify is positively correlated with danceability.\n\n\n\n",
-    "preview": "posts/2021-09-09-assignment1distill/TidyTuesday2_files/figure-html5/unnamed-chunk-3-1.png",
-    "last_modified": "2021-09-22T14:44:12-05:00",
-    "input_file": "TidyTuesday2.knit.md"
+    "preview": "posts/2021-09-22-tidy-tuesday-2/tidy-tuesday-2_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2021-09-22T14:50:35-05:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2021-09-09-assignment1distill/",
+    "title": "Assignment 1: Github and Websites",
+    "description": "This post will explore the basics of setting up GitHub and creating websites using RStudio.",
+    "author": [
+      {
+        "name": "Tshering Wangchuk",
+        "url": {}
+      }
+    ],
+    "date": "2021-09-09",
+    "categories": [],
+    "contents": "\nDescription\n This objective of this blog post is to learn how to set up a website using R (distill). The post is the first of many, as I begin documenting my R work and portfolio under the guidance of Professor Lisa Lendway in the coming months.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-09-09T21:00:23-05:00",
+    "input_file": {}
   }
 ]

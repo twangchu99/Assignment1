@@ -1,9 +1,10 @@
 ---
-title: "Tidy Tuesday 2: Audio Features Dataset"
+title: "Tidy Tuesday 2"
 description: |
   This post will explore how features / characteristics of music production affect their popularity on Spotify
 author:
   - name: Tshering Wangchuk
+    url: {}
 date: 09-22-2021
 output:
   distill::distill_article:
@@ -45,3 +46,5 @@ Audio %>% ggplot(aes(x = danceability, y = spotify_track_popularity)) + geom_smo
 ```
 <br>
 <br> The goal of using this dataset was to obersve characteristics / features of music that increased it's popularity on Spotify. I selected four artists that have a large following among the younger generation and the plot displays that the chances of a song being liked on spotify is positively correlated with danceability. 
+
+
