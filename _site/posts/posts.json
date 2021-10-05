@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-10-05-tidy-tuesday-3/",
+    "title": "Tidy Tuesday 3: Registered Nurses",
+    "description": "This post will explore visualizations utilizing a dataset on Registered Nurses in the U.S. and their wages.",
+    "author": [
+      {
+        "name": "Tshering Wangchuk",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-05",
+    "categories": [],
+    "contents": "\n\n\n\n\n\n\nVisualizations\n As per the Bureau of Labor Statistics website, the five states of California, Texas, New York, Florida and Pennsylvania have the highest level of employment for Registered Nurses. It will be interesting to see how wages have been increasing in these states across the decades as well as in comparison to each other.\n\n\n\n Using the nurses dataset, I wanted to understand how salary for nurses vary across different geographical regions in the U.S. In the visualization below, we can observe that California has the highest annual salary followed by other States such as Washington, Oregon, Arizona, Texas and Colorado. Most states on the East Coast have relatovely lower annual average salaries for Registered Nurses.\n\n\n\n\n\n\n\n\n\n",
+    "preview": "posts/2021-10-05-tidy-tuesday-3/tidy-tuesday-3_files/figure-html5/unnamed-chunk-5-1.png",
+    "last_modified": "2021-10-05T15:18:29-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2021-09-22-tidy-tuesday-2/",
     "title": "Tidy Tuesday 2",
     "description": "This post will explore how features / characteristics of music production affect their popularity on Spotify",
