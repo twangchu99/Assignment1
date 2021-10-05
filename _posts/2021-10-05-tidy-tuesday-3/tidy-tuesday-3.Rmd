@@ -1,0 +1,84 @@
+---
+title: "Tidy Tuesday 3: Registered Nurses"
+description: |
+  This post will explore visualizations utilizing a dataset on Registered Nurses in the U.S. and their wages. 
+author:
+  - name: Tshering Wangchuk
+    url: {}
+date: 10-05-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(ggmap)
+library(maps)
+library(ggthemes)
+library(tidyverse)
+library(tidytuesdayR)
+library(plotly)
+library(gganimate)
+library(scales)
+```
+
+
+```{r}
+nurses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-05/nurses.csv')
+```
+
+
+### Visualizations
+
+<br> As per the [Bureau of Labor Statistics](https://www.bls.gov/oes/2017/may/oes291141.htm) website, the five states of California, Texas, New York, Florida and Pennsylvania have the highest level of employment for Registered Nurses. It will be interesting to see how wages have been increasing in these states across the decades as well as in comparison to each other. 
+
+```{r}
+nurses %>% filter(State %in% c("California", "Texas", "New York", "Florida", "Pennsylvania")) %>%
+  group_by(Year, State) %>% 
+  mutate(State = fct_reorder(State, `Annual Salary Avg`, sum, .desc = TRUE)) %>% 
+  group_by(State) %>% 
+  ggplot(aes(x = Year, y = `Annual Salary Avg`, fill = State)) +
+  geom_area(position = "stack") + geom_text(aes(label = State),
+            position = "stack", 
+            check_overlap = TRUE) + scale_y_continuous(labels = comma) +
+  scale_fill_viridis_d(option = "viridis") +
+  theme(legend.position = "none") +
+  transition_reveal(Year)  +
+  labs(title = expression(atop(textstyle("Figure 1: Annual Average Salary For Registered Nurses In The U.S"),
+                          atop(textstyle("With The Highest Employment level In This Occupation")))),
+       y = "Annual Average Salary (in $)",
+       caption = "Tshering Wangchuk, Macalester College")
+      
+```
+
+<br> Using the nurses dataset, I wanted to understand how salary for nurses vary across different geographical regions in the U.S. In the visualization below, we can observe that California has the highest annual salary followed by other States such as Washington, Oregon, Arizona, Texas and Colorado. Most states on the East Coast have relatovely lower annual average salaries for Registered Nurses.
+
+```{r}
+nurses <- nurses %>% mutate(state_lower = tolower(State))
+```
+
+```{r}
+states_map <- map_data("state")
+
+nurses %>%
+  ggplot(aes(fill = `Annual Salary Avg`)) +
+  geom_map(aes(map_id = state_lower), color = "gray", size = 0.3, map = states_map) + 
+  expand_limits(x=states_map$long, y=states_map$lat) + 
+  theme_map() + 
+  scale_fill_viridis_b() +
+  labs(fill = "Annual Salary Average",
+       title = "Figure 2: Annual Salary for Registered Nurses Across the U.S.") 
+
+```
+
+
