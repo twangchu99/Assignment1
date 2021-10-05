@@ -1,0 +1,47 @@
+---
+title: "Tidy Tuesday 2: Audio Features Dataset"
+description: |
+  This post will explore how features / characteristics of music production affect their popularity on Spotify
+author:
+  - name: Tshering Wangchuk
+date: 09-22-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Loading Library
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+```
+
+### Loading dataset
+
+```{r}
+audio_features <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-09-14/audio_features.csv')
+```
+
+### Data Visualization 
+
+```{r}
+ Audio <- audio_features %>% 
+          filter(performer %in% c("Drake", "Beyonce", "Polo G", "Ariana Grande")) %>%
+          group_by(performer) %>%
+          select(spotify_track_popularity, danceability)
+
+Audio %>% ggplot(aes(x = danceability, y = spotify_track_popularity)) + geom_smooth(method = lm) + 
+          labs(title = "The Relationship Between Popularity and Danceability on Spotify",
+                    x = "Danceability",
+                    y = "Popularity",
+                    caption = " Source: Tshering Wangchuk, Macalester College") + 
+          theme_clean()
+```
+<br>
+<br> The goal of using this dataset was to obersve characteristics / features of music that increased it's popularity on Spotify. I selected four artists that have a large following among the younger generation and the plot displays that the chances of a song being liked on spotify is positively correlated with danceability. 
