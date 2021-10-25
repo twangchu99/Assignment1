@@ -36,7 +36,7 @@ harvest_2021 <- read_sheet("https://docs.google.com/spreadsheets/d/1DU6dpxrbPGW2
 
 ### Visualizations 
 
-<br> Since I come from South Asia and eat peppers quite frequently, I was curious to understand patterns for the different type of peppers within the dataset. I decided to create a visualization that would allow us to understand each variety in comparison to eachother. The graph I produced informs uf of the different harvest rate for each type of pepper. 
+<br> Since I come from South Asia and eat peppers quite frequently, I was curious to understand patterns for the different type of peppers within the dataset. I decided to create a visualization that would allow us to understand each variety in comparison to eachother. The graph I produced informs us of the different harvest rate for each type of pepper. 
 
 ```{r}
 harvest_2021 %>% filter(vegetable %in% c("peppers")) %>%
