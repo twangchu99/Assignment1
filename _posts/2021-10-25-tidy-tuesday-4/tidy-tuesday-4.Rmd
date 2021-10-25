@@ -1,0 +1,54 @@
+---
+title: "Tidy Tuesday 4"
+description: |
+  This post will explore Professor Lisa lendway's Garden Dataset 2021 with the objective of producing informative visualizations
+author:
+  - name: Tshering Wangchuk
+    url: {}
+date: 2021-10-25
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Loading libraries
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(googlesheets4)
+library(lubridate)
+library(ggthemes)
+```
+
+### Loading dataset - Lisa Lendway's 2021 Garden Data
+
+```{r}
+gs4_deauth() 
+
+harvest_2021 <- read_sheet("https://docs.google.com/spreadsheets/d/1DU6dpxrbPGW2oJHQ6TG_xibazoGhvmRcqk2iPGOaRUI/edit?usp=sharing") %>% mutate(date = ymd(date))
+```
+
+### Visualizations 
+
+<br> Since I come from South Asia and eat peppers quite frequently, I was curious to understand patterns for the different type of peppers within the dataset. I decided to create a visualization that would allow us to understand each variety in comparison to eachother. The graph I produced informs uf of the different harvest rate for each type of pepper. 
+
+```{r}
+harvest_2021 %>% filter(vegetable %in% c("peppers")) %>%
+                 group_by(variety) %>% 
+                 summarise(weight = n()) %>% 
+                 ggplot(aes(x = reorder(variety, weight), y = weight, , fill = variety)) + 
+                 geom_bar(stat = "identity") + coord_flip() + 
+                 labs(title = "Harvest rate for different varieties of Pepper", 
+                      y = "Number of times harvested", x = "Varieties of Vegetables",
+                      caption = " Source: Tshering Wangchuk, Macalester College") + theme_clean() +
+                      theme(legend.position = "none")
+```
+
+
+
