@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-10-25-tidy-tuesday-4/",
+    "title": "Tidy Tuesday 4",
+    "description": "This post will explore Professor Lisa lendway's Garden Dataset 2021 with the objective of producing informative visualizations",
+    "author": [
+      {
+        "name": "Tshering Wangchuk",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-25",
+    "categories": [],
+    "contents": "\nLoading libraries\n\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(googlesheets4)\nlibrary(lubridate)\nlibrary(ggthemes)\n\n\n\nLoading dataset - Lisa Lendway’s 2021 Garden Data\n\n\ngs4_deauth() \n\nharvest_2021 <- read_sheet(\"https://docs.google.com/spreadsheets/d/1DU6dpxrbPGW2oJHQ6TG_xibazoGhvmRcqk2iPGOaRUI/edit?usp=sharing\") %>% mutate(date = ymd(date))\n\n\n\nVisualizations\n Since I come from South Asia and eat peppers quite frequently, I was curious to understand patterns for the different type of peppers within the dataset. I decided to create a visualization that would allow us to understand each variety in comparison to eachother. The graph I produced informs uf of the different harvest rate for each type of pepper.\n\n\nharvest_2021 %>% filter(vegetable %in% c(\"peppers\")) %>%\n                 group_by(variety) %>% \n                 summarise(weight = n()) %>% \n                 ggplot(aes(x = reorder(variety, weight), y = weight, , fill = variety)) + \n                 geom_bar(stat = \"identity\") + coord_flip() + \n                 labs(title = \"Harvest rate for different varieties of Pepper\", \n                      y = \"Number of times harvested\", x = \"Varieties of Vegetables\",\n                      caption = \" Source: Tshering Wangchuk, Macalester College\") + theme_clean() +\n                      theme(legend.position = \"none\")\n\n\n\n\n\n\n\n",
+    "preview": "posts/2021-10-25-tidy-tuesday-4/tidy-tuesday-4_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2021-10-25T18:52:41-05:00",
+    "input_file": "tidy-tuesday-4.knit.md"
+  },
+  {
     "path": "posts/2021-10-05-tidy-tuesday-3/",
     "title": "Tidy Tuesday 3: Registered Nurses",
     "description": "This post will explore visualizations utilizing a dataset on Registered Nurses in the U.S. and their wages.",
