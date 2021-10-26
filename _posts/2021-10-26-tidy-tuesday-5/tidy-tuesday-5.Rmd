@@ -1,0 +1,65 @@
+---
+title: "Tidy Tuesday 5"
+description: |
+  This post explores the Ultra Trail Running Dataset, which consists of trends in ultra running over the past 23 years. 
+author:
+  - name: Tshering Wangchuk
+    url: {}
+date: 2021-10-26
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Loading Libraries
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(ggthemes)
+```
+
+### Loading Dataset - Ultra Trail Running 
+
+```{r}
+ultra_rankings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/ultra_rankings.csv')
+```
+
+<br> I want to understand the performance levels among the different age groups within the dataset. I will produce a visualization that helps us observe this pattern.
+
+```{r}
+ultra_rankings_TW <- ultra_rankings %>%
+                     select(-rank, -race_year_id) %>%
+                     mutate(age_group = case_when(age >= 50  & age <= 59 ~ '4',
+                                                  age >= 40  & age <= 49 ~ '3',
+                                                  age >= 30  & age <= 39 ~ '2',
+                                                  age >= 20  & age <= 29 ~ '1')) %>%
+                     mutate(Time_in_minutes = time_in_seconds/60,
+                            Time = Time_in_minutes/60) %>%
+                     filter(age_group %in% c("1", "2", "3", "4"))
+                    
+```
+
+<br> In the graph below, I have classified the different ages into groups that have a range of 10 years each. Group 1 has the ages 20 to 29 years, Group 2 has the ages from 30 to 39 years, Group 3 has the ages from 40 to 49 years and Group 4 has the ages from 50 to 59 years old. 
+
+```{r,fig.align='center'}
+ultra_rankings_TW %>% group_by(age_group) %>%
+                    ggplot(aes(y = age_group, x = Time, fill = age_group)) + 
+                    geom_boxplot()+ coord_flip() + 
+                    labs(title = "Completion Time for the Racers by Age Group", 
+                         y = "Age Groups", x = "Time, in Hours",
+                      caption = " Source: Tshering Wangchuk, Macalester College") + theme_clean() +
+                      theme(legend.position = "none")
+```
+
+<br> It was surprising to see that although there is a negative correlation between age and completion time whereby as you grow older completion time is greater, the difference of Group 2 (30 to 39 years) relative to Group 4 (50 to 59 years) is not as substantial as I had assumed. 
+
+<br> Limitations to be aware of is that the time value for a considerable number of racers is NA, which may impact the quality of this inference. Furthermore, a short observation of the raw data informed me that some races only recorded the top runners (for example the top 15), hence this might affect the plot since more weightage is being attributed to the top racers of all age groups, making the difference relatively smaller. 
+
+
